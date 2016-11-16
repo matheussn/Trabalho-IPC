@@ -55,8 +55,8 @@ quando for o caso).<br>
 excessivamente.
 Observações:
 
- • Os professores em hipótese alguma verificarão ou ajudarão na construção do código.
+ • Os professores em hipótese alguma verificarão ou ajudarão na construção do código.<br>
  • Os professores poderão tirar dúvidas sobre o enunciado do problema em horário de
-aula ou horário de atendimento.
+aula ou horário de atendimento.<br>
  • A interpretação do problema e a construção da solução fazem parte da avaliação e
-deverão ser resolvidos pelo aluno.
+deverão ser resolvidos pelo aluno.<br>
