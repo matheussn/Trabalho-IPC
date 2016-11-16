@@ -45,7 +45,7 @@ Problema
  • Números romanos em naturais
 
 Instruções:
-O trabalho será avaliado principalmente levando em consideração:
+O trabalho será avaliado principalmente levando em consideração:<br>
 1) Realização das tarefas do trabalho.<br>
 2) Representação correta da entrada e saída dos dados.<br>
 3) Uso correto das variáveis.<br>
