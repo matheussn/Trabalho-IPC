@@ -1,15 +1,15 @@
 # Trabalho-IPC
 
 Alunos:<br>
-  *Hugo Souza
+  *Hugo Sousa Nasciutti
   <br>
-    Inscrição:
+    Inscrição: 11621BSI260
   <br>
   *Matheus Santiago Neto
   <br>
     Inscrição: 11621BSI252
   <br>
-  *
+  *Rodrigo Souza Rezende
   <br>
     Inscrição: 
   <br>
