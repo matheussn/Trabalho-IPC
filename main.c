@@ -1,5 +1,6 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 int vlr(char);
 
@@ -16,7 +17,7 @@ int main(){
     int j;
     long int number;
 
-    printf("Digite um valor para converter:  \n");
+    printf("Digite um valor para converter: ");
     scanf("%s",romano);
 
     if(atoi(romano) == 0){
@@ -44,14 +45,14 @@ int main(){
          i++;
     }
 
-    printf("O numero convertido e: %ld",numero);
+    printf("O numero convertido e: %ld\n",numero);
 
     }else{
 
     number = atoi(romano);
 
     if(number <= 0){
-         printf("Numero invalido");
+         printf("Numero invalido\n");
          return 0;
     }
 
@@ -125,7 +126,7 @@ int main(){
 
     printf("Em romano e: ");
     for(j=0;j<i;j++)
-         printf("%c",n_romano[j]);
+         printf("%c\n",n_romano[j]);
     }
 
     return 0;
