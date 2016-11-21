@@ -7,6 +7,7 @@ int vlr(char);
 void predig(char c1,char c2);
 void posdig(char c,int n);
 
+//mudei
 char n_romano[1000];
 int i=0;
 
