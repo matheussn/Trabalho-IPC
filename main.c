@@ -29,7 +29,6 @@ int main(){
     char romano[1000];
     long int numero =0;
     int j;
-    long int number;
     int count_limite=0;
 
     printf("Digite um valor para converter: ");
