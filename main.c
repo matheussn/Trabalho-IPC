@@ -17,7 +17,6 @@ int main(){
     char romano[1000];
     long int numero =0;
     int j;
-    long int number;
     
     printf("Digite um valor para converter: ");
     scanf("%s",romano);
@@ -51,77 +50,77 @@ int main(){
 
     }else{
 
-	    number = atoi(romano);
+	    numero = atoi(romano);
 
-	    if(number <= 0 || number > 3999){
+	    if(numero <= 0 || numero > 3999){
 	         printf("Número inválido, inserir um número > 0 e < 3999.\n");
 	         return 0;
 	    }
 
-	    while(number != 0){
+	    while(numero != 0){
 
-	        if(number >= 1000){
-	            posdig('M',number/1000);
-	            number = number - (number/1000) * 1000;
+	        if(numero >= 1000){
+	            posdig('M',numero/1000);
+	            numero = numero - (numero/1000) * 1000;
 	        }
-	        else if(number >=500){
-	            if(number < (500 + 4 * 100)){
-	                posdig('D',number/500);
-	                number = number - (number/500) * 500;
+	        else if(numero >=500){
+	            if(numero < (500 + 4 * 100)){
+	                posdig('D',numero/500);
+	                numero = numero - (numero/500) * 500;
 	            }
 	            else{
 	                predig('C','M');
-	                number = number - (1000-100);
+	                numero = numero - (1000-100);
 	            }
 	        }
-	        else if(number >=100){
-	            if(number < (100 + 3 * 100)){
-	                posdig('C',number/100);
-	                number = number - (number/100) * 100;
+	        else if(numero >=100){
+	            if(numero < (100 + 3 * 100)){
+	                posdig('C',numero/100);
+	                numero = numero - (numero/100) * 100;
 	            }
 	            else{
 	                predig('L','D');
-	                number = number - (500-100);
+	                numero = numero - (500-100);
 	            }
 	        }
-	        else if(number >=50){
-	            if(number < (50 + 4 * 10)){
-	                posdig('L',number/50);
-	                number = number - (number/50) * 50;
+	        else if(numero >=50){
+	            if(numero < (50 + 4 * 10)){
+	                posdig('L',numero/50);
+	                numero = numero - (numero/50) * 50;
 	            }
 	            else{
 	                predig('X','C');
-	                number = number - (100-10);
+	                numero = numero - (100-10);
 	            }
 	        }
-	        else if(number >=10){
-	            if(number < (10 + 3 * 10)){
-	                posdig('X',number/10);
-	                number = number - (number/10) * 10;
+	        else if(numero >=10){
+	            if(numero < (10 + 3 * 10)){
+	                posdig('X',numero/10);
+	                numero = numero - (numero/10) * 10;
 	            }
 	            else{
 	                predig('X','L');
-	                number = number - (50-10);
+	                numero = numero - (50-10);
 	            }
 	        }
-	        else if(number >=5){
-	            if(number < (5 + 4 * 1)){
-	                posdig('V',number/5);
-	                number = number - (number/5) * 5;
+	        else if(numero >=5){
+	            if(numero < (5 + 4 * 1)){
+	                posdig('V',numero/5);
+	                numero = numero - (numero/5) * 5;
 	            }
 	            else{
 	                predig('I','X');
-	                number = number - (10-1);
+	                numero = numero - (10-1);
 	            }
 	        }
-	        else if(number >=1){
-	            if(number < 4){
-	                posdig('I',number/1);
-	               number = number - (number/1) * 1;
+	        else if(numero >=1){
+	            if(numero < 4){
+	                posdig('I',numero/1);
+	               numero = numero - (numero/1) * 1;
 	            }
 	            else{
 	                predig('I','V');
-	                number = number - (5-1);
+	                numero = numero - (5-1);
 	            }
 	        }
 	    }
