@@ -1,3 +1,13 @@
+/*
+ * Grupo HMR
+
+ * Integrantes:
+
+ * Hugo Sousa Nasciutti - 11621BSI260
+ * Matheus Santiago Neto - 11621BSI252
+ * Rodrigo Souza Rezende - 11621BSI245
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -14,8 +24,8 @@ int i=0;
 
 
 
-int main(){	
-	setlocale(LC_ALL, "");
+int main(){
+    setlocale(LC_ALL, "");
     char romano[1000];
     long int numero =0;
     int j;
@@ -23,11 +33,12 @@ int main(){
     int count_limite=0;
 
     printf("Digite um valor para converter: ");
-    scanf("%s",romano);
+    scanf("%s", &romano);
 
-    for(j=0; j<strlen(romano); j++){ // Transformando todas as letras em maiúsculas para comparação.
-    	if(romano[j] >= 97 && romano[j]<=122){
-    		romano[j] -= 32;
+    /* Transformando todas as letras em maiúsculas para comparação.*/
+    for(j=0; j<strlen(romano); j++){
+        if(romano[j] >= 97 && romano[j]<=122){
+            romano[j] -= 32;
     	}
     	if(romano[j] == 'm' || romano[j] == 'M'){
     		count_limite++;
@@ -38,42 +49,39 @@ int main(){
     	}
 
     }
-    
+
     if(atoi(romano) == 0){
+        while(romano[i]){
+            if(vlr(romano[i]) < 0){
+                printf("Número inválido, inserir um número inteiro entre 1 e 3999.\n");
+                return 0;
+            }
 
-	    while(romano[i]){
+            if((strlen(romano) -i) > 2){
+	            if(vlr(romano[i]) < vlr(romano[i+2])){// Verifica a posição correta dos números romanos.
+	                printf("Número inválido, a ordem dos romanos está errada.\n");
+	                return 0;
+	            }
+	        }
 
-	         if(vlr(romano[i]) < 0){
-	             printf("Número inválido, inserir um número inteiro entre 1 e 3999.\n");
-	             return 0;
-	         }
-
-	         if((strlen(romano) -i) > 2){
-	             if(vlr(romano[i]) < vlr(romano[i+2])){// Verifica a posição correta dos números romanos.
-	                 printf("Número inválido, a ordem dos romanos está errada.\n");
-	                 return 0;
-	             }
-	         }
-
-	         if(vlr(romano[i]) >= vlr(romano[i+1]))
-	             numero = numero + vlr(romano[i]);
-	         else{
-	             numero = numero + (vlr(romano[i+1]) - vlr(romano[i]));
-	             i++;
-	         }
-	         i++;
+            if(vlr(romano[i]) >= vlr(romano[i+1]))
+	            numero = numero + vlr(romano[i]);
+	        else{
+	            numero = numero + (vlr(romano[i+1]) - vlr(romano[i]));
+	            i++;
+	        }
+	        i++;
     	}
 
-    	printf("O número convertido é: %ld",numero);
+        printf("O número convertido é: %ld",numero);
 
     }else{
 
 	    numero = atoi(romano);
 
-	    if(number <= 0 || number > 3999){
-	         printf("Número inválido, inserir um número inteiro entre 1 e 3999.\n");
-
-	         return 0;
+	    if(numero <= 0 || numero > 3999){
+            printf("Número inválido, inserir um número inteiro entre 1 e 3999.\n");
+	        return 0;
 	    }
 
 	    while(numero != 0){
@@ -155,11 +163,17 @@ int main(){
     return 0;
 }
 
+/*
+    Comentário da função
+*/
 void predig(char c1,char c2){
     n_romano[i++] = c1;
     n_romano[i++] = c2;
 }
 
+/*
+    Comentário da função
+*/
 void posdig(char c,int n){
     int j;
     for(j=0;j<n;j++)
@@ -167,6 +181,9 @@ void posdig(char c,int n){
 
 }
 
+/*
+    Função para atribuição de cada posição da string (romano), para com seu respectivo valor em inteiro
+*/
 int vlr(char c){
 
     int n_inteiro=0;
