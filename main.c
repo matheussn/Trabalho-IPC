@@ -10,7 +10,9 @@ void predig(char c1,char c2);
 void posdig(char c,int n);
 
 char n_romano[1000];
-int i=0, j=0;
+int i=0;
+
+
 
 int main(){	
 	setlocale(LC_ALL, "");
@@ -18,22 +20,37 @@ int main(){
     long int numero =0;
     int j;
     long int number;
-    
+    int count_limite=0;
+
     printf("Digite um valor para converter: ");
     scanf("%s",romano);
+
+    for(j=0; j<strlen(romano); j++){ // Transformando todas as letras em maiúsculas para comparação.
+    	if(romano[j] >= 97 && romano[j]<=122){
+    		romano[j] -= 32;
+    	}
+    	if(romano[j] == 'm' || romano[j] == 'M'){
+    		count_limite++;
+    	}
+    	if(count_limite >= 4){
+    		printf("Número romano maior que 3999, inserir um número inteiro entre 1 e 3999.\n");
+    		return 1;
+    	}
+
+    }
     
     if(atoi(romano) == 0){
 
 	    while(romano[i]){
 
 	         if(vlr(romano[i]) < 0){
-	             printf("Número inválido, inserir um número > 0 e < 4000.\n");
+	             printf("Número inválido, inserir um número inteiro entre 1 e 3999.\n");
 	             return 0;
 	         }
 
 	         if((strlen(romano) -i) > 2){
-	             if(vlr(romano[i]) < vlr(romano[i+2])){
-	                 printf("Número inválido, inserir um número > 0 e < 4000.\n");
+	             if(vlr(romano[i]) < vlr(romano[i+2])){// Verifica a posição correta dos números romanos.
+	                 printf("Número inválido, a ordem dos romanos está errada.\n");
 	                 return 0;
 	             }
 	         }
@@ -47,14 +64,14 @@ int main(){
 	         i++;
     	}
 
-    	printf("O número convertido é: %ld\n",numero);
+    	printf("O número convertido é: %ld",numero);
 
     }else{
 
 	    number = atoi(romano);
 
 	    if(number <= 0 || number > 3999){
-	         printf("Número inválido, inserir um número > 0 e < 3999.\n");
+	         printf("Número inválido, inserir um número inteiro entre 1 e 3999.\n");
 	         return 0;
 	    }
 
@@ -126,15 +143,15 @@ int main(){
 	        }
 	    }
 
-	    printf("Em romano é: ");
+	    printf("O número em romano é: ");
 
 	    for(j=0;j<i;j++)
 	        printf("%c",n_romano[j]);
     }
+
+
     	printf("\n");
-
     return 0;
-
 }
 
 void predig(char c1,char c2){
