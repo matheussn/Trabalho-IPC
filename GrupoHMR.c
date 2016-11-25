@@ -32,7 +32,7 @@ int main(){
     int count_limite=0;
 
     printf("Digite um valor para converter: ");
-    scanf("%s", &romano);
+    scanf("%s", romano);
 
     /* Transformando todas as letras em maiúsculas para comparação.*/
     for(j=0; j<strlen(romano); j++){
@@ -163,7 +163,9 @@ int main(){
 }
 
 /*
-    Comentário da função
+    Adiciona na variável n_romano[i] a letra que representa o número inserido pelo usuário.
+    Na ordem correta, como no caso de representar o número 9
+
 */
 void predig(char c1,char c2){
     n_romano[i++] = c1;
