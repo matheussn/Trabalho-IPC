@@ -20,19 +20,18 @@ void predig(char c1,char c2);
 void posdig(char c,int n);
 
 char n_romano[1000];
-int i=0;
 
-
+int i=0,j=0;
 
 int main(){
     setlocale(LC_ALL, "");
     char romano[1000];
     long int numero =0;
-    int j;
     int count_limite=0;
-
+    printf("Insira somente Algarismos Arábicos ou Números Romanos.\n");
+    printf("A leitura do tipo da entrada será automática.\n");
     printf("Digite um valor para converter: ");
-    scanf("%s", romano);
+    scanf("%s", romano); //Nome da variável char é romano mas a entrada pode ser dos 2 tipos.
 
     /* Transformando todas as letras em maiúsculas para comparação.*/
     for(j=0; j<strlen(romano); j++){
@@ -42,17 +41,51 @@ int main(){
     	if(romano[j] == 'm' || romano[j] == 'M'){
     		count_limite++;
     	}
-    	if(count_limite >= 4){
+    	if(count_limite >= 4){ //Caso verdadeiro o usuário inseriu o valor MMMM == 4000.
     		printf("Número romano maior que 3999, inserir um número inteiro entre 1 e 3999.\n");
     		return 1;
     	}
-
     }
 
+	//Corrigindo formato da entrada da string, evitando mesclagem de formatos de números.
+	if(romano[0] > 48 && romano[0] <= 57){ //Intervalo de 1 a 9, conversão tabela ASCII, >0 && <=9;
+		for(j=1; j<strlen(romano); j++){
+			if(romano[j] < 48 || romano[j] > 57){
+				printf("Erro 1: Formato de entrada inválido, insira apenas um único formato para conversão automática, programa encerrado.\n");
+				return 1;
+			}
+		}
+	}
+
+	//Corrigindo formato da entrada da string, evitando mesclagem de formatos de números.
+	if(vlr(romano[0]) != -1 && vlr(romano[0] != 0)){ //Número Romano identificado, verifica se é válido.
+		for(j=1; j<strlen(romano); j++){
+			if(vlr(romano[j]) == -1 || vlr(romano[j]) == 0){ //Se o resto da entrada não for número romano válido, encerra o programa.
+				printf("Erro 2: Formato de entrada inválido, insira apenas um único formato para conversão automática, programa encerrado.\n");
+				return 1;
+			}
+		}
+	}
+
+	/*Corrigindo entrada de valores para apenas a quantidade correta de romanos*/
+	// int count_I=0;
+ //    int count_V=0;
+ //    int count_X=0;
+ //    int count_L=0;
+ //    int count_C=0;
+ //    int count_D=0;
+ //    int count_M=0;
+ //    int k =0, m=0, n=0;
+ //    for(k=0; i<strlen(romano); k++){
+ //    	for()
+ //    		for()
+ //    }
+	
+	
     if(atoi(romano) == 0){
         while(romano[i]){
             if(vlr(romano[i]) < 0){
-                printf("Número inválido, inserir um número inteiro entre 1 e 3999.\n");
+                printf("Entrada inválida, inserir um número inteiro entre 1 e 3999.\n");
                 return 0;
             }
 
@@ -72,7 +105,7 @@ int main(){
 	        i++;
     	}
 
-        printf("O número convertido é: %ld",numero);
+        printf("O número romano em arábico é: %ld",numero);
 
     }else{
 
@@ -87,22 +120,27 @@ int main(){
 
 	        if(numero >= 1000){
 	            posdig('M',numero/1000);
-	            numero = numero - (numero/1000) * 1000;
+	            numero = numero - (numero/1000) * 1000; //Garantindo a subtração apenas do número que está na casa do milhar. Se a entrada for 2500, subtrair apenas 2000 e assim por diante no código abaixo.
 	        }
 	        else if(numero >=500){
 	            if(numero < (500 + 4 * 100)){
+	                if(numero/500 > 1){
+	                	printf("Excesso\n");
+	                	return 1;
+	                }
 	                posdig('D',numero/500);
 	                numero = numero - (numero/500) * 500;
+	            	
 	            }
 	            else{
 	                predig('C','M');
-	                numero = numero - (1000-100);
+	                numero = numero - (1000-100); 
 	            }
 	        }
 	        else if(numero >=100){
 	            if(numero < (100 + 3 * 100)){
 	                posdig('C',numero/100);
-	                numero = numero - (numero/100) * 100;
+	                numero = numero - (numero/100) * 100; 
 	            }
 	            else{
 	                predig('L','D');
@@ -141,7 +179,7 @@ int main(){
 	        }
 	        else if(numero >=1){
 	            if(numero < 4){
-	                posdig('I',numero/1);
+	               posdig('I',numero/1);
 	               numero = numero - (numero/1) * 1;
 	            }
 	            else{
@@ -151,7 +189,8 @@ int main(){
 	        }
 	    }
 
-	    printf("O número em romano é: ");
+	    
+	    printf("O número arábico em romano é: ");
 
 	    for(j=0;j<i;j++)
 	        printf("%c",n_romano[j]);
@@ -162,25 +201,38 @@ int main(){
     return 0;
 }
 
-/*
-    Adiciona na variável n_romano[i] a letra que representa o número inserido pelo usuário.
-    Na ordem correta, como no caso de representar o número 9
-
-*/
-void predig(char c1,char c2){
-    n_romano[i++] = c1;
-    n_romano[i++] = c2;
-}
 
 /*
-    Comentário da função
+    void posdig(){
+	
+	
+    }
 */
 void posdig(char c,int n){
-    int j;
     for(j=0;j<n;j++)
     	n_romano[i++] = c;
-
 }
+
+/*
+	void predrig(){
+
+    Adiciona na variável n_romano[i] a letra que representa o número inserido pelo usuário.
+    Na ordem correta, como no caso de representar o número 9, será representado como 'IX',
+    e assim para os outros elementos de acordo com as regras que foram definadas nas condições acima
+    que estão dentro do caso 'else' e assim que atribuido o valor c1 incrementar +1 em i para 
+    adicionar o valor de c2 corretamente e também depois de atribuído c2 na variável, incrementar +1 em i
+    para a análise das outras funções. ;
+    Lembrando que n_romano é uma variável char global.
+
+    }
+
+*/
+
+void predig(char c1,char c2){
+    n_romano[i++] = c1; //Variável Char Global.
+    n_romano[i++] = c2; 
+}
+
 
 /*
     Função para atribuição de cada posição da string (romano), para com seu respectivo valor em inteiro
