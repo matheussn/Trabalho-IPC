@@ -45,8 +45,8 @@ int main(){
 
 	//Corrigindo formato da entrada da string, evitando mesclagem de formatos de números.
 	if(romano[0] > 48 && romano[0] <= 57){ //Intervalo de 1 a 9, conversão tabela ASCII, >0 && <=9;
-		for(j=1; j<strlen(romano); j++){
-			if(romano[j] < 48 || romano[j] > 57){
+		for(j=1; j<strlen(romano); j++){ //
+			if(romano[j] < 48 || romano[j] > 57){ //A entrada do primeiro elemento é um número, se o resto da entrada não for número válido, encerra o programa.
 				printf("Erro 1: Formato de entrada inválido, insira apenas um único formato para conversão automática, execução do programa encerrado.\n");
 				return 1;
 			}
@@ -56,7 +56,7 @@ int main(){
 	//Corrigindo formato da entrada da string, evitando mesclagem de formatos de números.
 	if(vlr(romano[0]) != -1 && vlr(romano[0] != 0)){ //Número Romano identificado, verifica se é válido.
 		for(j=1; j<strlen(romano); j++){
-			if(vlr(romano[j]) == -1 || vlr(romano[j]) == 0){ //Se o resto da entrada não for número romano válido, encerra o programa.
+			if(vlr(romano[j]) == -1 || vlr(romano[j]) == 0){ //A entrada do primeiro elemento é romano, se o resto da entrada não for número romano válido, encerra o programa.
 				printf("Erro 2: Formato de entrada inválido, insira apenas um único formato para conversão automática, execução do programa encerrado.\n");
 				return 1;
 			}
@@ -64,7 +64,7 @@ int main(){
 	}
 
 /*Corrigindo entrada de valores para apenas a quantidade correta de romanos*/
-	int count_I=0;
+    int count_I=0;
     int count_V=0;
     int count_X=0;
     int count_L=0;
