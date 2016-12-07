@@ -22,13 +22,12 @@ void posdig(char c,int n);
 
 char n_romano[1000];
 
-int i=0,j=0; //i global pois é utilizada para situar a posição da leitura
+int i=0, j=0, k=0; //i global pois é utilizada para situar a posição da leitura
 
 int main(){
     setlocale(LC_ALL, "");
     char romano[1000];
     long int numero =0;
-    int count_limite=0;
     printf("Insira somente Algarismos Arábicos ou Números Romanos.\n");
     printf("A leitura do tipo da entrada será automática.\n");
     printf("Digite um valor para converter: ");
@@ -38,21 +37,14 @@ int main(){
     for(j=0; j<strlen(romano); j++){
         if(romano[j] >= 97 && romano[j]<=122){
             romano[j] -= 32;
-    	}
-    	if(romano[j] == 'm' || romano[j] == 'M'){
-    		count_limite++;
-    	}
-    	if(count_limite >= 4){ //Caso verdadeiro o usuário inseriu o valor MMMM == 4000.
-    		printf("Número romano maior que 3999, inserir um número inteiro entre 1 e 3999.\n");
-    		return 1;
-    	}
+    	}    		
     }
 
 	//Corrigindo formato da entrada da string, evitando mesclagem de formatos de números.
 	if(romano[0] > 48 && romano[0] <= 57){ //Intervalo de 1 a 9, conversão tabela ASCII, >0 && <=9;
 		for(j=1; j<strlen(romano); j++){
 			if(romano[j] < 48 || romano[j] > 57){
-				printf("Erro 1: Formato de entrada inválido, insira apenas um único formato para conversão automática, programa encerrado.\n");
+				printf("Erro 1: Formato de entrada inválido, insira apenas um único formato para conversão automática, execução do programa encerrado.\n");
 				return 1;
 			}
 		}
@@ -62,14 +54,11 @@ int main(){
 	if(vlr(romano[0]) != -1 && vlr(romano[0] != 0)){ //Número Romano identificado, verifica se é válido.
 		for(j=1; j<strlen(romano); j++){
 			if(vlr(romano[j]) == -1 || vlr(romano[j]) == 0){ //Se o resto da entrada não for número romano válido, encerra o programa.
-				printf("Erro 2: Formato de entrada inválido, insira apenas um único formato para conversão automática, programa encerrado.\n");
+				printf("Erro 2: Formato de entrada inválido, insira apenas um único formato para conversão automática, execução do programa encerrado.\n");
 				return 1;
 			}
 		}
 	}
-
-
-
 
 /*Corrigindo entrada de valores para apenas a quantidade correta de romanos*/
 	int count_I=0;
@@ -79,7 +68,7 @@ int main(){
     int count_C=0;
     int count_D=0;
     int count_M=0;
-    int k=0, m=0, n=0;
+
     for(k=0; k<strlen(romano);k++){
     	if(romano[k] == 'I')
     		count_I++;
@@ -129,18 +118,18 @@ int main(){
 
 
     if(atoi(romano) == 0){
-        for(k=0; k < strlen(romano); k++){ 
+        while(romano[i]){
             if(vlr(romano[k]) < 0){ //Verifica se o valor inserido é inválido de acordo com o que retorna na função vlr(), se -1 é inválido.        	
                 printf("Entrada de '%c' é inválida, inserir apenas Algarismos Arábicos ou Números Romanos, programa encerrado.\n", romano[k]);
                 return 1;
             }
-        }
             if((strlen(romano) -i) > 2){
 	            if(vlr(romano[i]) < vlr(romano[i+2])){// Verifica a posição correta dos números romanos.
-	                printf("Número inválido, a ordem dos romanos está errada.\n");
+	                printf("Número inválido, a ordem dos romanos está errada, execução do programa encerrada.\n");
 	                return 1;
 	            }
 	        }
+
             if(vlr(romano[i]) >= vlr(romano[i+1]))
 	            numero = numero + vlr(romano[i]);
 	        else{
@@ -148,11 +137,11 @@ int main(){
 	            i++;
 	        }
 	        i++;
+	    }
 	        
         printf("O número romano em arábico é: %ld",numero);
 
-    } 
-    else{
+    }else{
 
 	    numero = atoi(romano);
 
