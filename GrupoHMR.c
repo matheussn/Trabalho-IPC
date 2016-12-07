@@ -6,6 +6,7 @@
  * Hugo Sousa Nasciutti - 11621BSI260
  * Matheus Santiago Neto - 11621BSI252
  * Rodrigo Souza Rezende - 11621BSI245
+ *
 */
 
 #include <stdio.h>
@@ -21,7 +22,7 @@ void posdig(char c,int n);
 
 char n_romano[1000];
 
-int i=0,j=0;
+int i=0,j=0; //i global pois é utilizada para situar a posição da leitura
 
 int main(){
     setlocale(LC_ALL, "");
@@ -67,35 +68,79 @@ int main(){
 		}
 	}
 
-	/*Corrigindo entrada de valores para apenas a quantidade correta de romanos*/
-	// int count_I=0;
- //    int count_V=0;
- //    int count_X=0;
- //    int count_L=0;
- //    int count_C=0;
- //    int count_D=0;
- //    int count_M=0;
- //    int k =0, m=0, n=0;
- //    for(k=0; i<strlen(romano); k++){
- //    	for()
- //    		for()
- //    }
-	
-	
-    if(atoi(romano) == 0){
-        while(romano[i]){
-            if(vlr(romano[i]) < 0){
-                printf("Entrada inválida, inserir um número inteiro entre 1 e 3999.\n");
-                return 0;
-            }
 
+
+
+/*Corrigindo entrada de valores para apenas a quantidade correta de romanos*/
+	int count_I=0;
+    int count_V=0;
+    int count_X=0;
+    int count_L=0;
+    int count_C=0;
+    int count_D=0;
+    int count_M=0;
+    int k=0, m=0, n=0;
+    for(k=0; k<strlen(romano);k++){
+    	if(romano[k] == 'I')
+    		count_I++;
+    	else if(romano[k] == 'V')
+    		count_V++;
+    	else if(romano[k] == 'X')
+    		count_X++;
+    	else if(romano[k] == 'L')
+    		count_L++;
+    	else if(romano[k] == 'C')
+    		count_C++;
+    	else if(romano[k] == 'D')
+    		count_D++;
+    	else if(romano[k] == 'M')
+    		count_M++;
+    }
+
+	if(count_I++ > 3){
+		printf("Erro 3: Formato inválido, é permitido até no máximo III, execução do programa encerrada.\n");
+		return 1;
+	}
+	else if(count_V > 1){
+		printf("Erro 4: Formato inválido, é permitido até no máximo um único V, execução do programa encerrada.\n");
+		return 1;
+	}
+	else if(count_X > 3){
+		printf("Erro 5: Formato inválido, é permitido até no máximo XXX, execução do programa encerrada.\n");
+		return 1;
+	}
+	else if(count_L > 1){
+		printf("Erro 6: Formato inválido, é permitido até no máximo um único L, execução do programa encerrada.\n");
+		return 1;
+	}
+	else if(count_C > 3){
+		printf("Erro 7: Formato inválido, é permitido até no máximo CCC, execução do programa encerrada.\n");
+		return 1;
+	}
+	else if(count_D > 1){
+		printf("Erro 8: Formato inválido, é permitido até no máximo um único D, execução do programa encerrada.\n");
+		return 1;
+	}
+	else if(count_M > 3){
+		printf("Erro 9: Formato inválido, é permitido até no máximo MMM vide limitação do programa à 3999, execução do programa encerrada.\n");
+		return 1;
+	}
+
+
+
+    if(atoi(romano) == 0){
+        for(k=0; k < strlen(romano); k++){ 
+            if(vlr(romano[k]) < 0){ //Verifica se o valor inserido é inválido de acordo com o que retorna na função vlr(), se -1 é inválido.        	
+                printf("Entrada de '%c' é inválida, inserir apenas Algarismos Arábicos ou Números Romanos, programa encerrado.\n", romano[k]);
+                return 1;
+            }
+        }
             if((strlen(romano) -i) > 2){
 	            if(vlr(romano[i]) < vlr(romano[i+2])){// Verifica a posição correta dos números romanos.
 	                printf("Número inválido, a ordem dos romanos está errada.\n");
-	                return 0;
+	                return 1;
 	            }
 	        }
-
             if(vlr(romano[i]) >= vlr(romano[i+1]))
 	            numero = numero + vlr(romano[i]);
 	        else{
@@ -103,11 +148,11 @@ int main(){
 	            i++;
 	        }
 	        i++;
-    	}
-
+	        
         printf("O número romano em arábico é: %ld",numero);
 
-    }else{
+    } 
+    else{
 
 	    numero = atoi(romano);
 
@@ -119,15 +164,12 @@ int main(){
 	    while(numero != 0){
 
 	        if(numero >= 1000){
-	            posdig('M',numero/1000);
+	            posdig('M',numero/1000); 
 	            numero = numero - (numero/1000) * 1000; //Garantindo a subtração apenas do número que está na casa do milhar. Se a entrada for 2500, subtrair apenas 2000 e assim por diante no código abaixo.
 	        }
+
 	        else if(numero >=500){
-	            if(numero < (500 + 4 * 100)){
-	                if(numero/500 > 1){
-	                	printf("Excesso\n");
-	                	return 1;
-	                }
+	            if(numero < (500 + 4 * 100)){	                
 	                posdig('D',numero/500);
 	                numero = numero - (numero/500) * 500;
 	            	
@@ -137,16 +179,18 @@ int main(){
 	                numero = numero - (1000-100); 
 	            }
 	        }
+
 	        else if(numero >=100){
 	            if(numero < (100 + 3 * 100)){
 	                posdig('C',numero/100);
 	                numero = numero - (numero/100) * 100; 
 	            }
 	            else{
-	                predig('L','D');
+	                predig('C','D');
 	                numero = numero - (500-100);
 	            }
 	        }
+
 	        else if(numero >=50){
 	            if(numero < (50 + 4 * 10)){
 	                posdig('L',numero/50);
@@ -157,6 +201,7 @@ int main(){
 	                numero = numero - (100-10);
 	            }
 	        }
+
 	        else if(numero >=10){
 	            if(numero < (10 + 3 * 10)){
 	                posdig('X',numero/10);
@@ -167,6 +212,7 @@ int main(){
 	                numero = numero - (50-10);
 	            }
 	        }
+
 	        else if(numero >=5){
 	            if(numero < (5 + 4 * 1)){
 	                posdig('V',numero/5);
@@ -177,6 +223,7 @@ int main(){
 	                numero = numero - (10-1);
 	            }
 	        }
+
 	        else if(numero >=1){
 	            if(numero < 4){
 	               posdig('I',numero/1);
@@ -204,8 +251,8 @@ int main(){
 
 /*
     void posdig(){
-	
-	
+    	Insere na variável char n_romano o valor correspondente em romano do valor lido e anda 
+    	uma posição com i++, não há IV ou XC, apenas um único valor representante.	
     }
 */
 void posdig(char c,int n){
@@ -229,7 +276,7 @@ void posdig(char c,int n){
 */
 
 void predig(char c1,char c2){
-    n_romano[i++] = c1; //Variável Char Global.
+    n_romano[i++] = c1; //i e n_romano Global.
     n_romano[i++] = c2; 
 }
 
