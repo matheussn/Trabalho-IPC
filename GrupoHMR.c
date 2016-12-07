@@ -119,8 +119,8 @@ int main(){
 
     if(atoi(romano) == 0){
         while(romano[i]){
-            if(vlr(romano[k]) < 0){ //Verifica se o valor inserido é inválido de acordo com o que retorna na função vlr(), se -1 é inválido.        	
-                printf("Entrada de '%c' é inválida, inserir apenas Algarismos Arábicos ou Números Romanos, programa encerrado.\n", romano[k]);
+            if(vlr(romano[i]) < 0){ //Verifica se o valor inserido é inválido de acordo com o que retorna na função vlr(), se -1 é inválido.        	
+                printf("Entrada de '%c' é inválida, inserir apenas Algarismos Arábicos ou Números Romanos, programa encerrado.\n", romano[i]);
                 return 1;
             }
             if((strlen(romano) -i) > 2){
